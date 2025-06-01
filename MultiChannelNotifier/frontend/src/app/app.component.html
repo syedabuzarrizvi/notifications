@@ -1,0 +1,91 @@
+<div class="app-container min-h-screen">
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="flex items-center justify-center min-h-screen">
+    <div class="text-center">
+      <div class="spinner mx-auto mb-4"></div>
+      <p class="text-muted">Loading...</p>
+    </div>
+  </div>
+
+  <!-- Main Application -->
+  <div *ngIf="!isLoading" class="h-full">
+    <!-- Navigation -->
+    <nav *ngIf="showNavigation" class="bg-background border-b">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex">
+            <div class="flex-shrink-0 flex items-center">
+              <h1 class="text-xl font-bold text-primary">Techrar</h1>
+            </div>
+            <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+              <a routerLink="/dashboard" 
+                 routerLinkActive="border-primary text-primary"
+                 class="border-transparent text-muted hover:border-gray-300 hover:text-foreground inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                Dashboard
+              </a>
+              <a routerLink="/send" 
+                 routerLinkActive="border-primary text-primary"
+                 class="border-transparent text-muted hover:border-gray-300 hover:text-foreground inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                Send Notification
+              </a>
+              <a routerLink="/campaigns" 
+                 routerLinkActive="border-primary text-primary"
+                 class="border-transparent text-muted hover:border-gray-300 hover:text-foreground inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                Campaigns
+              </a>
+              <a routerLink="/templates" 
+                 routerLinkActive="border-primary text-primary"
+                 class="border-transparent text-muted hover:border-gray-300 hover:text-foreground inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                Templates
+              </a>
+            </div>
+          </div>
+          <div class="hidden sm:ml-6 sm:flex sm:items-center">
+            <div class="ml-3 relative">
+              <button (click)="logout()" 
+                      class="btn btn-outline btn-sm">
+                <mat-icon class="mr-2" style="font-size: 18px; width: 18px; height: 18px;">logout</mat-icon>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div class="sm:hidden">
+        <div class="pt-2 pb-3 space-y-1">
+          <a routerLink="/dashboard" 
+             routerLinkActive="bg-accent text-accent-foreground"
+             class="text-muted hover:bg-muted hover:text-foreground block px-3 py-2 text-base font-medium">
+            Dashboard
+          </a>
+          <a routerLink="/send" 
+             routerLinkActive="bg-accent text-accent-foreground"
+             class="text-muted hover:bg-muted hover:text-foreground block px-3 py-2 text-base font-medium">
+            Send Notification
+          </a>
+          <a routerLink="/campaigns" 
+             routerLinkActive="bg-accent text-accent-foreground"
+             class="text-muted hover:bg-muted hover:text-foreground block px-3 py-2 text-base font-medium">
+            Campaigns
+          </a>
+          <a routerLink="/templates" 
+             routerLinkActive="bg-accent text-accent-foreground"
+             class="text-muted hover:bg-muted hover:text-foreground block px-3 py-2 text-base font-medium">
+            Templates
+          </a>
+          <button (click)="logout()" 
+                  class="text-muted hover:bg-muted hover:text-foreground block w-full text-left px-3 py-2 text-base font-medium">
+            Logout
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-1">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

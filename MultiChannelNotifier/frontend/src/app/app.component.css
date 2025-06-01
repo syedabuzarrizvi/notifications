@@ -1,0 +1,71 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif;
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(8px);
+}
+
+main {
+  min-height: calc(100vh - 4rem);
+  background-color: hsl(var(--muted));
+}
+
+.max-w-7xl {
+  max-width: 80rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Navigation active states */
+.router-link-active {
+  border-color: hsl(var(--primary)) !important;
+  color: hsl(var(--primary)) !important;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  nav .hidden {
+    display: none;
+  }
+  
+  nav .sm\:hidden {
+    display: block;
+  }
+}
+
+@media (min-width: 641px) {
+  nav .sm\:hidden {
+    display: none;
+  }
+  
+  nav .sm\:flex {
+    display: flex;
+  }
+  
+  nav .sm\:ml-6 {
+    margin-left: 1.5rem;
+  }
+  
+  nav .sm\:space-x-8 > * + * {
+    margin-left: 2rem;
+  }
+  
+  nav .sm\:items-center {
+    align-items: center;
+  }
+}
+
+/* Loading spinner enhancement */
+.spinner {
+  width: 40px;
+  height: 40px;
+}

@@ -1,0 +1,160 @@
+<div class="dashboard-container">
+  <!-- Header -->
+  <div class="dashboard-header">
+    <h1>Notification Dashboard</h1>
+    <div class="connection-status">
+      <span [class]="isConnected ? 'connected' : 'disconnected'">
+        {{ isConnected ? 'Live Updates Active' : 'Offline' }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <p>Loading dashboard data...</p>
+  </div>
+
+  <!-- Main Dashboard Content -->
+  <div *ngIf="!isLoading" class="dashboard-content">
+    
+    <!-- Statistics Cards -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">📊</div>
+        <div class="stat-content">
+          <h3>{{ stats.totalNotifications }}</h3>
+          <p>Total Notifications</p>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon">📤</div>
+        <div class="stat-content">
+          <h3>{{ stats.sentToday }}</h3>
+          <p>Sent Today</p>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon">✅</div>
+        <div class="stat-content">
+          <h3>{{ stats.deliveredToday }}</h3>
+          <p>Delivered Today</p>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon">❌</div>
+        <div class="stat-content">
+          <h3>{{ stats.failedToday }}</h3>
+          <p>Failed Today</p>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon">📈</div>
+        <div class="stat-content">
+          <h3>{{ stats.successRate.toFixed(1) }}%</h3>
+          <p>Success Rate</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Channel Breakdown -->
+    <div class="channel-breakdown">
+      <h2>Channel Distribution</h2>
+      <div class="channel-grid">
+        <div class="channel-item">
+          <span class="channel-icon">📧</span>
+          <span class="channel-name">Email</span>
+          <span class="channel-count">{{ stats.channelBreakdown.email }}</span>
+        </div>
+        <div class="channel-item">
+          <span class="channel-icon">📱</span>
+          <span class="channel-name">SMS</span>
+          <span class="channel-count">{{ stats.channelBreakdown.sms }}</span>
+        </div>
+        <div class="channel-item">
+          <span class="channel-icon">🔔</span>
+          <span class="channel-name">Push</span>
+          <span class="channel-count">{{ stats.channelBreakdown.push }}</span>
+        </div>
+        <div class="channel-item">
+          <span class="channel-icon">💬</span>
+          <span class="channel-name">WhatsApp</span>
+          <span class="channel-count">{{ stats.channelBreakdown.whatsapp }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+      <h2>Quick Actions</h2>
+      <div class="action-buttons">
+        <button class="action-btn primary" (click)="sendQuickNotification()">
+          📤 Send Notification
+        </button>
+        <button class="action-btn secondary" (click)="createCampaign()">
+          📋 Create Campaign
+        </button>
+        <button class="action-btn secondary" (click)="viewAnalytics()">
+          📊 View Analytics
+        </button>
+      </div>
+    </div>
+
+    <!-- Recent Notifications -->
+    <div class="recent-notifications">
+      <h2>Recent Notifications</h2>
+      <div class="notifications-table">
+        <div class="table-header">
+          <span>Channel</span>
+          <span>Recipient</span>
+          <span>Subject</span>
+          <span>Status</span>
+          <span>Time</span>
+        </div>
+        
+        <div *ngFor="let notification of recentNotifications" class="table-row">
+          <span class="channel-cell">
+            {{ getChannelIcon(notification.channel) }} {{ notification.channel }}
+          </span>
+          <span class="recipient-cell">{{ notification.recipient }}</span>
+          <span class="subject-cell">{{ notification.subject || '-' }}</span>
+          <span [class]="'status-cell ' + getStatusColor(notification.status)">
+            {{ notification.status }}
+          </span>
+          <span class="time-cell">{{ notification.created_at | date:'short' }}</span>
+        </div>
+        
+        <div *ngIf="recentNotifications.length === 0" class="empty-state">
+          <p>No notifications found</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Campaigns Overview -->
+    <div class="campaigns-overview">
+      <h2>Active Campaigns</h2>
+      <div class="campaigns-grid">
+        <div *ngFor="let campaign of campaigns" class="campaign-card">
+          <div class="campaign-header">
+            <h4>{{ campaign.name }}</h4>
+            <span class="campaign-status">{{ campaign.status }}</span>
+          </div>
+          <p class="campaign-description">{{ campaign.description }}</p>
+          <div class="campaign-stats">
+            <span>{{ getChannelIcon(campaign.channel) }} {{ campaign.channel }}</span>
+            <span>{{ campaign.estimated_recipients }} recipients</span>
+          </div>
+        </div>
+        
+        <div *ngIf="campaigns.length === 0" class="empty-state">
+          <p>No active campaigns</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

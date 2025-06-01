@@ -1,0 +1,89 @@
+You are tasked with designing and implementing a multi-channel notification platform called Techrar Notification Service that enables merchants to send push, SMS, email, and WhatsApp messages at scale. The system must expose REST APIs, provide a self-service web UI, and maintain low latency and high throughput.
+
+🛠️ Core Functional Requirements
+1. Channels & Providers:
+
+Integrate at least one provider per channel (push, SMS, email, WhatsApp).
+
+Support dynamic provider selection.
+
+2. Merchant API:
+
+Provide REST endpoints to:
+
+Send immediate notifications.
+
+Create and cancel scheduled notifications.
+
+Query delivery status.
+
+Use an idempotency key for "send" endpoints.
+
+3. Web UI:
+
+Merchant login functionality.
+
+Create/manage message templates.
+
+Upload recipients via CSV (sample only).
+
+View campaign status.
+
+4. Scheduling & Queueing:
+
+Schedule notifications with a reliable job queue.
+
+Support at-least-once delivery and retries.
+
+5. Performance & Scalability:
+
+Support high API and notification volumes.
+
+Keep latency low for “send now” actions.
+
+Design a scalable architecture.
+
+6. Persistence:
+
+Store merchant data, templates, schedules, and delivery receipts.
+
+7. Security:
+
+Enforce HTTPS.
+
+Protect sensitive data.
+
+Implement basic rate limiting.
+
+📦 Deliverables
+Source Code: Clean, modular repo with frontend, backend, and infra separated.
+
+Documentation: README.md, architecture and scaling document, OpenAPI/GraphQL spec.
+
+Tests: Unit tests for logic, integration test for one end-to-end outbound flow.
+
+Deployment: Dockerfile(s), docker-compose, and sample config.
+
+Sample Data: Fixtures/scripts for demo merchants and notifications.
+
+🎯 Evaluation Focus
+System design clarity and justification.
+
+Code quality and best practices.
+
+Performance, reliability, and edge case handling.
+
+Test coverage and ease of setup.
+
+Documentation and communication.
+
+Clean, functional UI (visual polish not required).
+
+🚀 Bonus (Stretch Goals)
+Rule-based audience segmentation (e.g., last login > X days).
+
+Live delivery updates via WebSockets.
+
+A/B testing framework for message variants.
+
+Would you like help breaking this down into tasks, choosing a tech stack (e.g., Django + Angular),
